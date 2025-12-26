@@ -1,0 +1,118 @@
+<%= turbo_frame_tag item do %>
+  <div class="container">
+    <div class="name">
+      <div class="left">
+        <div class="title">
+          <%= item.title %>
+        </div>
+        <% if current_user.seller?  %>
+          <div class="min">
+          Minimum selling price:
+          <span class="price">
+            <%= number_to_currency(
+              item.minimum_selling_price,
+              unit: "$",
+              strip_insignificant_zeros: true
+            ) %>
+          </span>
+        </div>
+
+        <div class="min">
+          Starting bid price:
+          <span class="price">
+            <%= number_to_currency(
+              item.starting_bid_price,
+              unit: "$",
+              strip_insignificant_zeros: true
+            ) %>
+          </span>
+        </div>
+        <% end %>
+         
+    
+        <div class="status">
+          <% if item.active? %>
+            <div class="active">
+              ongoing
+            </div>
+          <% elsif item.upcoming? %>
+            <div class="upcoming">
+              upcoming
+            </div>
+          <% else %>
+            <div class="inactive">
+              ended
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+     
+    <div class="description">
+      <div id="details">Details:</div>
+      <div><%= item.description %></div>
+    </div>
+    <% unless current_user.buyer? %>
+      <div class="bidder-count">
+        <% if item.bids.any? %>
+          <%= link_to item_path(item), data: {turbo_frame: "modal"} do %>
+            <%= pluralize(item.bids.count, "bidder") %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  
+    <div class="expiry">
+      <% if item.active? %>
+        Bidding ends on
+        <strong>
+          <%= item.ending_bid_time.strftime("%b %d, %Y") %>
+        </strong>
+      <% elsif item.expired? && item.bids.any? %>
+        <div class="winner">
+          <strong>
+            <%= item.bids.bid_winner_text %>
+          </strong>
+        </div>
+      <% else %>
+        No bidders.
+      <% end %>
+    </div>
+
+    <% bid = item.bids.find_by(user_id: current_user.id) %>
+    <% if bid %>
+      <div class="amount-placed">
+        Placed
+        <%= number_to_currency(bid.amount, unit: "$", strip_insignificant_zeros: true) %>
+      </div>
+    <% end %>
+    
+    <div class="buttons">
+      <% if current_user.seller? %>
+        <%= render "items/seller", item: item %>
+      <% else %>
+        <div class="user-button">
+          <% if bid && item.active? %>
+            <%= link_to "Update Bid", edit_item_bid_path(item, bid), data: { turbo_frame: "modal" }, class: "update-bid" %>
+          <% elsif !bid && item.active? %>
+            <%= link_to "Manual Bid",
+            new_item_bid_path(item, bid_type: "manual"),
+            data: {
+              turbo_frame: "modal"
+            } %>
+            <%= link_to "Auto Bid",
+            new_item_bid_path(item, bid_type: "auto"),
+            data: {
+              turbo_frame: "modal"
+            } %>
+          <% elsif bid && item.expired? || item.expired? %>
+          <div class="ended">
+          The bidding has ended.
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

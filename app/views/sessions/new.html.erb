@@ -1,0 +1,25 @@
+<main class="sessions">
+  <div class="centre">
+    <div class="container">
+      <div id="flash">
+        <% flash.each do | message_type, message | %>
+          <div class="<%= message_type %>">
+            <%= message %>
+          </div>
+        <% end %>
+      </div>
+      <%= form_for(:session, url: login_path) do |form| %>
+        <%= form.email_field :email, placeholder: "Email" %>
+        <%= form.password_field :password, placeholder: "Password" %>
+        <%= form.submit "Log in" %>
+      <% end %>
+      <div class="text">
+        Don't have an account?
+        <%= link_to "Sign up!", register_path %>
+      </div>
+      <div class="back">
+        <%= link_to "< Back to Home", root_path %>
+      </div>
+    </div>
+  </div>
+</main>

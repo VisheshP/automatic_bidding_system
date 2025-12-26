@@ -1,0 +1,15 @@
+<main class="items">
+  <%= render "layouts/nav" %>
+  <section>
+    <div class="top">
+      <div class="title">All Bidding Items</div>
+      <% if current_user.seller? %>
+        <%= link_to "+ Add New Item", new_item_path, data: { turbo_frame: "modal" } %>
+      <% end %>
+    </div>
+    <%= turbo_frame_tag "items", id: "items" do %>
+      <%= render @items %>
+    <% end %>
+  </section>
+</main>
+<%= turbo_frame_tag "modal" %>

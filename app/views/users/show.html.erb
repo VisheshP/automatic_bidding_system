@@ -1,0 +1,14 @@
+<main class="user-bids">
+  <%= render "layouts/nav" %>
+  <section>
+    <div class="top">
+      <div class="title"><%= @user.full_name %>'s Bids</div>
+    </div>
+    <div class="bids">
+      <% @user.bids.order(created_at: :desc).each do |bid| %>
+        <%= render partial: 'users/user_item_bid', locals: {bid: bid} %>
+      <% end %>
+    </div>
+  </section>
+</main>
+<%= turbo_frame_tag "modal" %>

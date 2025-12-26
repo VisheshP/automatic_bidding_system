@@ -1,0 +1,24 @@
+<%= form_with(model: bid, url: url) do |form| %>
+  <%= render "shared/errors", object: bid %>
+  <div>
+    <%= form.number_field :amount,
+                placeholder: "Enter your bid amount",
+                      style: "margin-top: 10px" %>
+  </div>
+
+  <% if @bid.auto?%>
+    <div>
+      <%= form.number_field :max_amount,
+                  placeholder: "Enter your max bid amount",
+                        style: "margin-top: 10px" %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.hidden_field :bid_type, value: @bid.bid_type %>
+  </div>
+  <div>
+    <%= form.submit action_name == "new" ? "Place a Bid" : "Update" %>
+  </div>
+<% end %>
+

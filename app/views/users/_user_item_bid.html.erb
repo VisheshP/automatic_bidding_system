@@ -1,0 +1,73 @@
+<%= turbo_frame_tag bid.item do %>
+  <div class="container">
+    <div class="name">
+      <div class="left">
+        <div class="title">
+          <%= bid.item.title %>
+        </div>
+        <div class="min">
+          Minimum bid:
+          <span>
+            <%= number_to_currency(
+              bid.item.starting_bid_price,
+              unit: "$",
+              strip_insignificant_zeros: true
+            ) %>
+          </span>
+        </div>
+        <div class="status">
+          <% if bid.item.active? %>
+            <div class="active">
+              ongoing
+            </div>
+          <% else %>
+            <div class="inactive">
+              ended
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+    <div class="description">
+      <div id="details">Details:</div>
+      <div><%= bid.item.description %></div>
+    </div>
+    <div class="expiry">
+      <% if bid.item.active? %>
+        Bidding ends on
+        <strong>
+          <%= bid.item.ending_bid_time.strftime("%b %d, %Y") %>
+        </strong>
+      <% elsif bid.item.expired? && bid.item.bids.any? %>
+        <div class="winner">
+          <strong>
+            <%= bid.item.bids.bid_winner_text %>
+          </strong>
+        </div>
+      <% else %>
+        No bidders.
+      <% end %>
+
+    </div>
+    <div class="amount-placed">
+      Placed
+      <%= number_to_currency(bid.amount, unit: "$", strip_insignificant_zeros: true) %>
+    </div>
+    <div class="buttons">
+      <% if current_user.seller? && bid.item.active? %>
+        <div class="user-button">
+          <%= link_to "Update Bid",
+          edit_item_bid_path(bid.item, bid),
+          data: {
+            turbo_frame: "modal"
+          } %>
+        </div>
+      <% elsif current_user.buyer? && bid.item.expired? %>
+        <div class="ended">
+          The bidding has ended.
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

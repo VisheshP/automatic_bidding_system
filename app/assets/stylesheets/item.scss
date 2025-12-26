@@ -1,0 +1,261 @@
+.items {
+  section {
+    overflow-x: scroll;
+    .top {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+
+      .title {
+        font-weight: 600;
+        font-size: 20px;
+      }
+
+      a {
+        background-color: #d9471f;
+        color: white;
+        border-radius: 5px;
+        border: 1px solid #d9471f;
+        cursor: pointer;
+        text-decoration: none;
+
+        font-size: 14px;
+        padding: 5px 10px;
+        &:hover {
+          border: 1px solid #d9471f;
+          color: #d9471f;
+          background-color: inherit;
+        }
+      }
+    }
+
+    #items {
+      display: flex;
+      flex-wrap: wrap;
+
+      .container {
+        width: 300px;
+        height: 300px;
+        border: 1px solid #a58063;
+        margin: 0 20px 20px 0;
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+
+        .name {
+          font-size: 18px;
+          font-weight: 600;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid #a58063;
+          padding-bottom: 10px;
+
+          .left {
+            .title {
+              text-transform: capitalize;
+            }
+            .min {
+              font-weight: 400;
+              font-size: 14px;
+            }
+
+            .price {
+              font-weight: 500;
+            }
+
+            .status {
+              font-size: 10px;
+              color: white;
+              width: 60px;
+              text-align: center;
+              font-weight: 400;
+              text-transform: uppercase;
+              margin-top: 5px;
+
+              .active {
+                background-color: green;
+                padding: 3px 0;
+                border-radius: 5px;
+              }
+
+              .upcoming {
+                background-color: #d9881f;
+                padding: 3px 0;
+                border-radius: 5px;
+              }
+
+              .inactive {
+                padding: 3px 0;
+                border-radius: 5px;
+                background-color: rgb(204, 35, 35);
+              }
+            }
+          }
+        }
+
+        img {
+          width: 50px;
+          border-radius: 5px;
+        }
+        .description {
+          margin-top: 10px;
+          color: grey;
+          font-size: 14px;
+          padding-bottom: 10px;
+
+          #details {
+            font-weight: 500;
+            color: #161613;
+            margin-bottom: 10px;
+          }
+        }
+        .bidder-count {
+          color: grey;
+          font-size: 14px;
+          margin-bottom: 10px;
+
+          a {
+            color: #161613;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+              color: black;
+            }
+          }
+        }
+
+        .expiry {
+          font-size: 14px;
+          border-bottom: 1px solid #a58063;
+          padding-bottom: 10px;
+        }
+
+        .amount-placed {
+          font-size: 14px;
+          color: #d9471f;
+          border-bottom: 1px solid #a58063;
+          padding: 10px 0;
+          text-align: center;
+          color: #d9471f;
+          font-weight: 600;
+        }
+
+        .buttons {
+          text-align: center;
+          margin-top: 20px;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          height: 100%;
+          font-size: 14px;
+
+          .seller-buttons {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 1fr 1fr 1fr;
+
+            .edit,
+            .delete {
+              display: flex;
+              cursor: pointer;
+              justify-content: center;
+              align-items: center;
+              background-color: #d9471f;
+              font-size: 12px;
+
+              &:nth-child(2) {
+                background-color: rgb(37, 119, 141);
+              }
+
+              &:last-child {
+                background-color: rgb(192, 58, 58);
+                border-radius: 0 5px 5px 0;
+              }
+
+              a {
+                margin: 0 10px;
+                text-decoration: none;
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+              }
+            }
+
+            .disabled {
+              opacity: 0.55;
+              pointer-events: none;
+            }
+
+            input[type="submit"] {
+              background: none;
+              border: none;
+              color: white;
+              width: 100%;
+              height: 100%;
+              background-color: #d9881f;
+              border-radius: 5px 0 0 5px;
+              cursor: pointer;
+              font-size: 12px;
+            }
+
+            input[value="Stop"] {
+              background-color: rgb(192, 58, 58);
+            }
+
+            input[data-disable-with="true"] {
+              opacity: 0.44;
+              pointer-events: none;
+            }
+          }
+
+          .user-button {
+            padding-bottom: 10px;
+
+            a,
+            input[type="submit"] {
+              text-decoration: none;
+              color: white;
+              background-color: #d9471f;
+              border: 1px solid #d9471f;
+              border-radius: 5px;
+              padding: 10px 30px;
+
+              &:hover {
+                border: 1px solid #d9471f;
+                color: #d9471f;
+                background-color: inherit;
+              }
+            }
+
+            .amount {
+              text-decoration: none;
+              border: 1px solid #d9471f;
+              border-radius: 5px;
+              padding: 10px 30px;
+              color: #d9471f;
+              background-color: inherit;
+              transform: translateY(10px);
+            }
+
+            .ended {
+              font-size: 12px;
+              color: grey;
+            }
+
+            .winner {
+              border: 1px solid #d9471f;
+              padding: 10px 30px;
+              border-radius: 5px;
+              color: #d9471f;
+            }
+          }
+        }
+      }
+    }
+  }
+}

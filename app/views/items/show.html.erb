@@ -1,0 +1,27 @@
+<%= turbo_frame_tag "modal" do %>
+  <main class="show-bidder">
+    <div class="container">
+      <div class="name">
+        <%= @item.title %>
+      </div>
+      <div class="title">Bidders</div>
+      <div class="grid">
+        <div class="header">
+          <div class="rank">Rank</div>
+          <div class="user-name">Name</div>
+          <div class="amount">Amount</div>
+        </div>
+        <div class="data">
+          <% @item.bids.order(amount: :desc).each do |bidder| %>
+          <div> <%= @item.bids.order(amount: :desc).find_index(bidder) + 1%></div>
+            <div>
+              <%= bidder.user.full_name %></div>
+            <div><%= number_to_currency(bidder.amount, unit: "$", strip_insignificant_zeros: true) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <%= link_to "Close", :back, class: "back" %>
+    </div>
+  </main>
+<% end %>

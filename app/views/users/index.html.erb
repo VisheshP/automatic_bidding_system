@@ -1,0 +1,41 @@
+<main class="users">
+  <%= render "layouts/nav" %>
+  <section>
+    <div class="top">
+      <div class="title">All Users</div>
+    </div>
+    <div class="container">
+      <% @users.each do |user| %>
+        <div class="box">
+          <div class="avatar">
+            <%= avatar_for(user) %>
+          </div>
+          <div class="details">
+            <div class="name">
+              <%= user.full_name %>
+            </div>
+            <div class="email">
+              <%= user.email %>
+            </div>
+          </div>
+          <div class="bid-count">
+            <% unless user.bids.empty? %>
+              <%= link_to user do %>
+                <div class="button">
+                  View
+                  <%= pluralize(user.bids.count, "bid") %>
+                </div>
+              <% end %>
+            <% end %>
+              <%= link_to "Delete User",
+              user,
+              data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure?"
+              }, class: "delete" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,46 @@
+<main class="bids">
+  <%= render "layouts/nav" %>
+  <section>
+    <div class="top">
+      <div class="title">All Bids</div>
+    </div>
+    <div class="table">
+      <div class="th">
+        <div>Bid Type</div>
+        <div>Item Title</div>
+        <div>Starting Bid Price</div>
+        <div>MSP</div>
+        <div>Status</div>
+        <div>Bidder</div>
+        <div>Bid Placed</div>
+      </div>
+      <% @bids.order(updated_at: :desc).each do |bid| %>
+        <div class="data">
+          <div><%= bid.bid_type.humanize %></div>
+          <div><%= bid.item.title %></div>
+          <div><%= number_to_currency(
+              bid.item.starting_bid_price,
+              unit: "$",
+              strip_insignificant_zeros: true
+            ) %></div>
+          <div><%= number_to_currency(
+              bid.item.minimum_selling_price,
+              unit: "$",
+              strip_insignificant_zeros: true
+            ) %></div>
+          <% if bid.item.active? %>
+            <div class="active">
+              ongoing
+            </div>
+          <% else %>
+            <div class="inactive">
+              ended
+            </div>
+          <% end %>
+          <div><%= bid.user.full_name %></div>
+          <div><%= number_to_currency(bid.amount, unit: "$", strip_insignificant_zeros: true) %></div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</main>

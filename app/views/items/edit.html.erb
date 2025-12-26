@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "modal" do %>
+  <main class="item-modal">
+    <div class="container">
+      <div class="top">
+        <div class="title">Edit Item</div>
+      </div>
+      <%= render "form", item: @item %>
+      <%= link_to "Close", :back, class: "back" %>
+    </div>
+  </main>
+<% end %>

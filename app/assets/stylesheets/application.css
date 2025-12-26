@@ -1,0 +1,105 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: #f6f4f0;
+  padding: 30px 200px;
+  color: #161613;
+}
+
+.clicked {
+  color: #d9471f;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.errors {
+  font-size: 12px;
+  color: red;
+  text-align: left;
+}
+
+.notice,
+.danger {
+  display: block;
+  font-size: 14px;
+  width: 200px;
+  padding: 20px;
+  position: absolute;
+  top: 9%;
+  left: 50%;
+  margin-left: -90px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #d9471f;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+  -webkit-animation: moveOpen 2s;
+  -webkit-animation-iteration-count: forwards;
+  -webkit-animation-fill-mode: forwards;
+  z-index: 20;
+}
+
+.danger {
+  width: 250px;
+}
+
+@-webkit-keyframes moveOpen {
+  from {
+    -webkit-transform: translate(0, -100px);
+  }
+  10% {
+    -webkit-transform: translate(0, 20px);
+  }
+  12% {
+    -webkit-transform: translate(0, 22px);
+  }
+  16% {
+    -webkit-transform: translate(0, 20px);
+  }
+  80% {
+    -webkit-transform: translate(0, 20px);
+  }
+  85% {
+    -webkit-transform: translate(0, 25px);
+  }
+  to {
+    -webkit-transform: translate(0, -200px);
+  }
+}
+
+.alert {
+  color: rgb(98, 33, 228);
+  margin-bottom: 20px;
+  font-size: 12px;
+}

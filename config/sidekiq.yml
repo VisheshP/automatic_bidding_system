@@ -1,0 +1,6 @@
+:concurrency: 5
+:queues:
+  - default
+
+:namespace: sidekiq_automatic_bidding_app
+url: redis://localhost:6379/0

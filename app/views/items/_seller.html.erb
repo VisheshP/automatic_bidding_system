@@ -1,0 +1,34 @@
+<div class="seller-buttons">
+  <% if item.active? %>
+    <%= form_for item do |f| %>
+      <%= f.hidden_field :bidding_status, value: "expired" %>
+      <%= f.submit "Stop", class: "stop" %>
+    <% end %>
+  <% else %>
+    <%= form_for item do |f| %>
+      <%= f.hidden_field :bidding_status, value: "active" %>
+      <%= f.submit "Resume",
+               data: {
+                 disable_with: item.is_resumable?
+               },
+               class: "resume" %>
+    <% end %>
+  <% end %>
+  <% if item.expired?  %>
+    <div class="edit disabled">
+      <%= link_to "Edit", edit_item_path(item), data: { turbo_frame: "modal" } %>
+    </div>
+  <% else %>
+    <div class="edit">
+      <%= link_to "Edit", edit_item_path(item), data: { turbo_frame: "modal" } %>
+    </div>
+  <% end %>
+  <div class="delete">
+    <%= link_to "Delete",
+    item,
+    data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"
+    } %>
+  </div>
+</div>

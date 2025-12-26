@@ -1,0 +1,76 @@
+.users {
+  section {
+    .top {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      height: 80px;
+
+      .title {
+        font-weight: 600;
+        font-size: 20px;
+      }
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+
+      .box {
+        width: 300px;
+        height: 350px;
+        border: 1px solid #a58063;
+        margin: 0 20px 20px 0;
+        border-radius: 10px;
+        padding: 40px 20px;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        .name {
+          font-size: 18px;
+          font-weight: 600;
+        }
+
+        .email {
+          color: grey;
+          font-size: 14px;
+        }
+
+        .bid-count {
+          margin-top: 10px;
+          color: grey;
+          font-size: 14px;
+          display: flex;
+          justify-content: center;
+
+          .button {
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #d9471f;
+            color: #d9471f;
+            background: none;
+            display: flex;
+            align-items: center;
+            margin: 0 5px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #d9471f;
+              border: 1px solid #d9471f;
+              color: white;
+            }
+          }
+
+          a {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

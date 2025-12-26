@@ -1,0 +1,28 @@
+header {
+  height: 80px;
+  border-bottom: 1px solid #a58063;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+
+    .logo {
+      img {
+        width: 150px;
+      }
+    }
+
+    ul li {
+      display: inline-flex;
+      list-style-type: none;
+      margin-left: 80px;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+  }
+}

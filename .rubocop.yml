@@ -1,0 +1,31 @@
+inherit_from:
+  - .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2
+  Exclude:
+    - "bin/**/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "vendor/**/*"
+
+Layout/LineLength:
+  Max: 100
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+
+Rails:
+  Enabled: true

@@ -1,0 +1,39 @@
+<main class="sessions">
+  <div class="centre">
+    <div class="container">
+      <%= form_with(model: @user) do |form| %>
+        <%= render "shared/errors", object: @user %>
+        <div>
+          <%= form.text_field :full_name, placeholder: "Full name" %>
+        </div>
+
+        <div>
+          <%= form.email_field :email, placeholder: "Email address" %>
+        </div>
+
+        <div>
+          <%= form.select :role, options_for_select(User.roles.keys.map { |role| [role.humanize, role] }), prompt: "Select User Role" %>
+        </div>
+
+        <div>
+          <%= form.password_field :password, placeholder: "Password" %>
+        </div>
+
+        <div>
+          <%= form.password_field :password_confirmation, placeholder: "Confirm Password" %>
+        </div>
+
+        <div>
+          <%= form.submit "Sign up" %>
+        </div>
+      <% end %>
+      <div class="text">
+        Already have an account?
+        <%= link_to "Log in!", login_path %>
+      </div>
+      <div class="back">
+        <%= link_to "< Back to Home", root_path %>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,3 @@
+<%= turbo_stream.replace @bid.item %>
+<%= turbo_stream.update 'modal', '' %>
+<%= turbo_stream.prepend("flash", partial: "layouts/flash") %>

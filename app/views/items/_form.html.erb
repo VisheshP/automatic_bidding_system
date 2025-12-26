@@ -1,0 +1,37 @@
+<%= form_with(model: item) do |form| %>
+  <%= render "shared/errors", object: item %>
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+  <% unless item.bids.any? %>
+    <div>
+      <%= form.label :starting_bid_price, style: "display: block" %>
+      <%= form.number_field :starting_bid_price %>
+    </div>
+
+    <div>
+      <%= form.label :minimum_selling_price, style: "display: block" %>
+      <%= form.number_field :minimum_selling_price %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :starting_bid_time, style: "display: block" %>
+    <%= form.datetime_local_field :starting_bid_time %>
+  </div>
+
+  <div>
+    <%= form.label :ending_bid_time, style: "display: block" %>
+    <%= form.datetime_local_field :ending_bid_time %>
+  </div>
+
+
+  <div>
+    <%= form.submit action_name == "new" ? "Create" : "Update" %>
+  </div>
+<% end %>
