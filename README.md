@@ -14,6 +14,14 @@ Internally, the system uses Redis to handle automatic bidding processes and ensu
 
 ## 🛠️ Setup
 
+### Assumptions made for the development
+
+- **Single Bid Placement**: Each user can place only one bid on an item. That bid can either be a manual bid or an auto-bid, but not both.
+
+- **Higher Bids Trigger Updates**: Whenever a new manual or auto-bid is placed that is greater than the previous highest bid, the system will update all existing auto-bids.
+
+- **Auto-Bid Increments**: When a higher bid is placed, the auto-bids are incremented accordingly, as long as they fall within the allowed bidding range.
+
 ### Prerequisites
 
 - **Ruby**: `3.2.1`
