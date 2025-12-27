@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Item, type: :model do
-  let(:user) { create(:user) }
-
   subject do
     build(
       :item,
@@ -15,6 +13,8 @@ RSpec.describe Item, type: :model do
       ending_bid_time: 2.days.from_now
     )
   end
+
+  let(:user) { create(:user) }
 
   # -----------------------------
   # Associations
@@ -33,18 +33,18 @@ RSpec.describe Item, type: :model do
     it { is_expected.to validate_presence_of(:starting_bid_price) }
 
     it do
-      is_expected.to validate_length_of(:title)
+      expect(subject).to validate_length_of(:title)
         .is_at_least(1)
         .is_at_most(20)
     end
 
     it do
-      is_expected.to validate_numericality_of(:starting_bid_price)
+      expect(subject).to validate_numericality_of(:starting_bid_price)
         .is_greater_than(0)
     end
 
     it do
-      is_expected.to validate_numericality_of(:minimum_selling_price)
+      expect(subject).to validate_numericality_of(:minimum_selling_price)
         .is_greater_than(0)
     end
   end
@@ -54,7 +54,7 @@ RSpec.describe Item, type: :model do
   # -----------------------------
   describe "enums" do
     it do
-      is_expected.to define_enum_for(:bidding_status)
+      expect(subject).to define_enum_for(:bidding_status)
         .with_values(active: 0, expired: 1, upcoming: 2)
     end
   end
@@ -65,7 +65,7 @@ RSpec.describe Item, type: :model do
   describe "callbacks" do
     context "after_initialize" do
       it "sets bidding_status to upcoming if starting_bid_time is in future" do
-        item = Item.new(
+        item = described_class.new(
           user: user,
           starting_bid_time: 1.day.from_now
         )

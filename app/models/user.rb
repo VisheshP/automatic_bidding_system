@@ -5,7 +5,8 @@ class User < ApplicationRecord
 
   validates :full_name, :email, presence: true
 
-  validates :full_name, format: { with: /\A[a-zA-Z ]+\z/, message: "only allows letters" }, length: { in: 1..40 }
+  validates :full_name, format: { with: /\A[a-zA-Z ]+\z/, message: "only allows letters" }, 
+                        length: { in: 1..40 }
 
   validates :email, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }

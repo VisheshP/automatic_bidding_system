@@ -31,8 +31,8 @@ Item.create!(
   description: "An antique wall clock from the 19th century.",
   starting_bid_price: 100,
   minimum_selling_price: 120,
-  starting_bid_time: Time.now,
-  ending_bid_time: Time.now + 7.days,
+  starting_bid_time: Time.zone.now,
+  ending_bid_time: 7.days.from_now,
   user_id: User.find_by(email: "seller@gmail.com").id
 )
 
@@ -41,8 +41,8 @@ Item.create!(
   description: "A beautiful modern art piece.",
   starting_bid_price: 200,
   minimum_selling_price: 220,
-  starting_bid_time: Time.now,
-  ending_bid_time: Time.now + 7.days,
+  starting_bid_time: Time.zone.now,
+  ending_bid_time: 7.days.from_now,
   user_id: User.find_by(email: "seller@gmail.com").id
 )
 
@@ -51,7 +51,7 @@ Item.create!(
   description: "A classic novel from the 19th century.",
   starting_bid_price: 50,
   minimum_selling_price: 60,
-  starting_bid_time: Time.now,
-  ending_bid_time: Time.now + 7.days,
+  starting_bid_time: Time.zone.now,
+  ending_bid_time: 7.days.from_now,
   user_id: User.find_by(email: "seller@gmail.com").id
 )

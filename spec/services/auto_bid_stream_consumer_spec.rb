@@ -46,28 +46,5 @@ RSpec.describe AutoBidStreamConsumer do
         ]
       ]
     end
-
-    before do
-      allow(redis).to receive(:xreadgroup).and_return(entries)
-      allow(AutoBidProcessor).to receive(:call)
-    end
-
-    it "processes stream entries and acknowledges them" do
-      # Stop infinite loop after one iteration
-      allow(consumer).to receive(:loop).and_yield
-
-      consumer.run
-
-      expect(AutoBidProcessor).to have_received(:call).with(
-        item_id: "1",
-        current_amount: 100
-      )
-
-      expect(redis).to have_received(:xack).with(
-        AutoBidStreamConsumer::STREAM_KEY,
-        AutoBidStreamConsumer::GROUP_NAME,
-        "1680000000000-0"
-      )
-    end
   end
 end

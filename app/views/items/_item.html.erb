@@ -93,9 +93,7 @@
         <%= render "items/seller", item: item %>
       <% else %>
         <div class="user-button">
-          <% if bid && item.active? %>
-            <%= link_to "Update Bid", edit_item_bid_path(item, bid), data: { turbo_frame: "modal" }, class: "update-bid" %>
-          <% elsif !bid && item.active? %>
+          <% if !bid && item.active? %>
             <%= link_to "Manual Bid",
             new_item_bid_path(item, bid_type: "manual"),
             data: {

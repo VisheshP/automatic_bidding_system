@@ -27,27 +27,27 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:email) }
 
     it do
-      is_expected.to validate_length_of(:full_name)
+      expect(subject).to validate_length_of(:full_name)
         .is_at_least(1)
         .is_at_most(40)
     end
 
     it do
-      is_expected.to allow_value("Vishesh Purohit").for(:full_name)
-      is_expected.not_to allow_value("Vishesh123").for(:full_name)
+      expect(subject).to allow_value("Vishesh Purohit").for(:full_name)
+      expect(subject).not_to allow_value("Vishesh123").for(:full_name)
     end
 
     it do
-      is_expected.to validate_uniqueness_of(:email)
+      expect(subject).to validate_uniqueness_of(:email)
     end
 
     it do
-      is_expected.to allow_value("test@example.com").for(:email)
-      is_expected.not_to allow_value("invalid-email").for(:email)
+      expect(subject).to allow_value("test@example.com").for(:email)
+      expect(subject).not_to allow_value("invalid-email").for(:email)
     end
 
     it do
-      is_expected.to validate_length_of(:password)
+      expect(subject).to validate_length_of(:password)
         .is_at_least(6)
         .is_at_most(20)
     end
@@ -58,7 +58,7 @@ RSpec.describe User, type: :model do
   # -----------------------------
   describe "enums" do
     it do
-      is_expected.to define_enum_for(:role)
+      expect(subject).to define_enum_for(:role)
         .with_values(buyer: 0, seller: 1)
     end
   end

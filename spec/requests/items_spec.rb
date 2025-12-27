@@ -62,9 +62,9 @@ RSpec.describe "ItemsController", type: :request do
       it "creates item and redirects" do
         sign_in(seller)
 
-        expect {
+        expect do
           post items_path, params: valid_params
-        }.to change(Item, :count).by(1)
+        end.to change(Item, :count).by(1)
 
         expect(response).to redirect_to(items_path)
       end
@@ -74,9 +74,9 @@ RSpec.describe "ItemsController", type: :request do
       it "does not create item" do
         sign_in(seller)
 
-        expect {
+        expect do
           post items_path, params: invalid_params
-        }.not_to change(Item, :count)
+        end.not_to change(Item, :count)
 
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -131,9 +131,9 @@ RSpec.describe "ItemsController", type: :request do
     it "deletes the item" do
       sign_in(seller)
 
-      expect {
+      expect do
         delete item_path(item)
-      }.to change(Item, :count).by(-1)
+      end.to change(Item, :count).by(-1)
 
       expect(response).to redirect_to(items_path)
     end

@@ -18,9 +18,8 @@ Rails.application.routes.draw do
   resources :users, except: %i[new]
 
   resources :items, except: %i[show] do
-    resources :bids, only: %i[new create edit update]
+    resources :bids, only: %i[new create]
   end
-
 
   # Catch-all route 
   match "*path", to: "errors#not_found", via: :all

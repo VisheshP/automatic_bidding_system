@@ -1,9 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Bid, type: :model do
-  let(:user) { create(:user, full_name: "Vishesh Purohit") }
-  let(:item) { create(:item, minimum_selling_price: 100, starting_bid_price: 50, starting_bid_time: Time.current, ending_bid_time: Time.current + 1.hour, bidding_status: :active, user: user) }
-
   subject do
     build(
       :bid,
@@ -13,6 +10,12 @@ RSpec.describe Bid, type: :model do
       max_amount: 200,
       bid_type: :manual
     )
+  end
+
+  let(:user) { create(:user, full_name: "Vishesh Purohit") }
+  let(:item) do
+    create(:item, minimum_selling_price: 100, starting_bid_price: 50, starting_bid_time: Time.current,
+                  ending_bid_time: 1.hour.from_now, bidding_status: :active, user: user)
   end
 
   # -----------------------------
@@ -35,7 +38,7 @@ RSpec.describe Bid, type: :model do
   # -----------------------------
   describe "enums" do
     it do
-      is_expected.to define_enum_for(:bid_type)
+      expect(subject).to define_enum_for(:bid_type)
         .with_values(manual: 0, auto: 1)
     end
   end

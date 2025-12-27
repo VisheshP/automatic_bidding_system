@@ -65,9 +65,9 @@ RSpec.describe "UsersController", type: :request do
         expect_any_instance_of(ApplicationController)
           .to receive(:login)
 
-        expect {
+        expect do
           post users_path, params: valid_params
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
 
         expect(response).to redirect_to(items_path)
         expect(flash[:notice].downcase).to include("welcome, vishesh purohit!")
@@ -76,9 +76,9 @@ RSpec.describe "UsersController", type: :request do
 
     context "with invalid params" do
       it "does not create user" do
-        expect {
+        expect do
           post users_path, params: invalid_params
-        }.not_to change(User, :count)
+        end.not_to change(User, :count)
 
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -134,9 +134,9 @@ RSpec.describe "UsersController", type: :request do
     it "deletes user and redirects" do
       sign_in(seller)
 
-      expect {
+      expect do
         delete user_path(seller)
-      }.to change(User, :count).by(-1)
+      end.to change(User, :count).by(-1)
 
       expect(response).to redirect_to(users_path)
       expect(flash[:notice]).to eq("Account deleted!")

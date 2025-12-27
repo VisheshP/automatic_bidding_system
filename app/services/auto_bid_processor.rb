@@ -1,4 +1,3 @@
-
 class AutoBidProcessor
   INCREMENT = 10
 
@@ -12,28 +11,17 @@ class AutoBidProcessor
       highest = Bid.where(item_id: item_id).maximum(:amount) || 0
       current_amount = highest if highest > current_amount
 
-      auto_bids = Bid.where(item_id: item_id, bid_type: "auto").where("max_amount > ?", current_amount).order(:created_at)
+      auto_bids = Bid.where(item_id: item_id, bid_type: "auto")
+                     .where("max_amount > ? and amount < ?", current_amount, current_amount)
 
       return unless auto_bids.any?
 
-      # Store the final bids each auto-bidder can place
-      final_bids = []
-
-      auto_bids.each do |bid|
-        next_amount = [current_amount + INCREMENT, bid.max_amount].min
-        # Only allow one increment per auto-bidder
-        if next_amount > current_amount
-          final_bids << { bidder: bid, amount: next_amount }
-        end
-      end
-
-      # Find the highest final bid among auto-bidders
-      winning_bid = final_bids.max_by { |b| b[:amount] }
-
-      if winning_bid
-        # Update the winning auto-bidder's bid
-        winning_bid[:bidder].update!(amount: winning_bid[:amount])
-      end
+      Bid.where(item_id: item_id, bid_type: "auto")
+         .where(amount: ...current_amount)
+         .where(max_amount: current_amount..)
+         .update_all(<<~SQL.squish)
+           amount = LEAST(max_amount, #{current_amount + INCREMENT})
+         SQL
     end
   ensure
     Redis.current.del(lock_key)

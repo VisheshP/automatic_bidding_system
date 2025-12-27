@@ -15,9 +15,6 @@ class BidsController < ApplicationController
     @bid = @item.bids.build(bid_type: params[:bid_type] || "manual")
   end
 
-  def edit
-  end
-
   def create
     @bid = @item.bids.build(bid_params)
     @bid.user_id = current_user.id
@@ -29,19 +26,6 @@ class BidsController < ApplicationController
       end
     else
       render :new, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    bid_params.delete(:bid_type)
-    @bid.assign_attributes(bid_params)
-    if @bid.update(bid_params)
-      respond_to do |format|
-        format.html { redirect_to item_path(@bid.item) }
-        format.turbo_stream { flash.now[:notice] = "Bid updated!" }
-      end
-    else
-      render :edit, status: :unprocessable_entity
     end
   end
 

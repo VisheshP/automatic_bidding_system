@@ -3,7 +3,7 @@ class Bid < ApplicationRecord
   belongs_to :item
 
   validates :amount, presence: true
-  after_commit :publish_bid_event, on: [:create, :update]
+  after_commit :publish_bid_event, on: :create
 
   scope :bid_winner, ->() { find_by(amount: self.maximum(:amount)) }
 
@@ -18,6 +18,7 @@ class Bid < ApplicationRecord
 
   private
 
+  # Publish bid event to Redis stream for further processing
   def publish_bid_event
     Redis.current.xadd(
       "auction:bids",
